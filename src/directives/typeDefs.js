@@ -6,8 +6,14 @@ typeDefs = gql`
         USER
     }
 
+    enum TypeEnum {
+        CACHORRO
+        GATO
+    }
+
     directive @auth(
-        role: RoleEnum
+        role: RoleEnum,
+        pet: TypeEnum
     ) on OBJECT | FIELD_DEFINITION
 
     type User {
@@ -19,13 +25,24 @@ typeDefs = gql`
         role: RoleEnum!
     }
 
+    type Pet {
+        id: ID!
+        name: String!
+        age: Int!
+        breed: String!
+        pet: TypeEnum!
+    }
+
     type Query {
         allUsers: [User]
+        allPets: [Pet]
     }
 
     type Mutation {
         createUser(data: CreateUserInput): User
         deleteUser(id: ID!): Boolean
+
+        createPet(data: CreatePetInput): Pet
 
         signin(
             email: String!
@@ -44,6 +61,13 @@ typeDefs = gql`
         email: String!
         password: String!
         role: RoleEnum!
+    }
+
+    input CreatePetInput {
+        name: String!
+        age: Int!
+        breed: String!
+        pet: TypeEnum!
     }
 
 `

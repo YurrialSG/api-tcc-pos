@@ -1,4 +1,4 @@
-const { ApolloServer, gql } = require('apollo-server')
+const { ApolloServer } = require('apollo-server')
 const Sequelize = require('./database')
 const AuthDirective = require('./directives/auth')
 const { typeDefs } = require('./directives/typeDefs')
