@@ -36,14 +36,14 @@ typeDefs = gql`
 
     type Query {
         allUsers: [User]
-        allPets: [Pet]
+        allPets: [Pet] @auth(role: ADMIN)
     }
 
     type Mutation {
         createUser(data: CreateUserInput): User
         deleteUser(id: ID!): Boolean
 
-        createPet(data: CreatePetInput): Pet
+        createPet(data: CreatePetInput): Pet 
         deletePet(id: ID!): Boolean
 
         signin(

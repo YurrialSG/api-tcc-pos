@@ -1,8 +1,10 @@
 const { ApolloServer } = require('apollo-server')
 const Sequelize = require('./database')
+const jwt = require('jsonwebtoken')
 const AuthDirective = require('./directives/auth')
 const { typeDefs } = require('./directives/typeDefs')
 const { resolver } = require('./directives/resolver')
+const User = require('./models/user')
 
 const server = new ApolloServer({
     typeDefs: typeDefs,
@@ -14,6 +16,23 @@ const server = new ApolloServer({
     async context({ req, connection }) {
         if (connection) {
             return connection.context
+        }
+
+        const token = req.headers.authorization
+
+        if (token) {
+            const jwtData = jwt.decode(token.replace('Bearer ', ''))
+            const { id } = jwtData
+
+            const user = await User.findOne({
+                where: { id }
+            })
+
+            return {
+                headers: req.headers,
+                userId: id,
+                roleId: user.role
+            }
         }
 
         return {

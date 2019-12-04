@@ -1,5 +1,26 @@
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 const User = require('../models/user')
+
+async function signin(parent, body, context, info) {
+    const user = await User.findOne({
+        where: { email: body.email }
+    })
+
+    if (user) {
+        const isCorrect = await bcrypt.compare(body.password, user.password)
+
+        if (!isCorrect)
+            throw new Error('Senha inválida')
+
+        const token = jwt.sign({ id: user.id }, 'secret')
+
+        return {
+            token,
+            user
+        }
+    }
+}
 
 async function createUser(parent, body, context, info) {
     body.data.password = await bcrypt.hash(body.data.password, 10)
@@ -20,4 +41,4 @@ async function deleteUser(parent, body, context, info) {
     return true
 }
 
-module.exports = { createUser, deleteUser }
+module.exports = { signin, createUser, deleteUser }

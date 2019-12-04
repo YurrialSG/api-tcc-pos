@@ -1,7 +1,7 @@
 const User = require('../models/user')
 const Pet = require('../models/pet')
 
-const { createUser, deleteUser } = require('../mutations/userMutation')
+const { signin,createUser, deleteUser } = require('../mutations/userMutation')
 const { createPet, deletePet } = require('../mutations/petMutation')
 
 const resolver = {
@@ -15,6 +15,7 @@ const resolver = {
     },
     Mutation: {
         //mutations User
+        signin,
         createUser,
         deleteUser,
 
