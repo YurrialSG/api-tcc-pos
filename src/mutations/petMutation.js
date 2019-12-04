@@ -1,9 +1,25 @@
 const Pet = require('../models/pet')
+const User = require('../models/user')
 
 async function createPet(parent, body, context, info) {
-    const pet = await Pet.create(body.data)
-    const reloadedPet = pet.reload()
-    return reloadedPet
+    if (body.data.user) {
+        const pet = await Pet.create(body.data)
+        await pet.setUser(body.data.user.id)
+        const reloadedPet = pet.reload({ include: [User] })
+        return reloadedPet
+    }
 }
 
-module.exports = { createPet }
+async function deletePet(parent, body, context, info) {
+    const pet = await Pet.findOne({
+        where: { id: body.id }
+    })
+
+    if (!pet)
+        throw new Error('Pet não encontrado')
+
+    await pet.destroy()
+    return true
+}
+
+module.exports = { createPet, deletePet }

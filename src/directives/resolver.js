@@ -2,7 +2,7 @@ const User = require('../models/user')
 const Pet = require('../models/pet')
 
 const { createUser, deleteUser } = require('../mutations/userMutation')
-const { createPet } = require('../mutations/petMutation')
+const { createPet, deletePet } = require('../mutations/petMutation')
 
 const resolver = {
     Query: {
@@ -10,7 +10,7 @@ const resolver = {
             return User.findAll()
         },
         allPets() {
-            return Pet.findAll()
+            return Pet.findAll({ include: [User] })
         }
     },
     Mutation: {
@@ -20,6 +20,7 @@ const resolver = {
 
         //mutations Pet
         createPet,
+        deletePet,
     }
 }
 

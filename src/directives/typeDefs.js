@@ -31,6 +31,7 @@ typeDefs = gql`
         age: Int!
         breed: String!
         pet: TypeEnum!
+        user: User!
     }
 
     type Query {
@@ -43,6 +44,7 @@ typeDefs = gql`
         deleteUser(id: ID!): Boolean
 
         createPet(data: CreatePetInput): Pet
+        deletePet(id: ID!): Boolean
 
         signin(
             email: String!
@@ -68,6 +70,11 @@ typeDefs = gql`
         age: Int!
         breed: String!
         pet: TypeEnum!
+        user: CreateUserPetInput
+    }
+
+    input CreateUserPetInput {
+        id: ID!
     }
 
 `
