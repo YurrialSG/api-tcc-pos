@@ -16,6 +16,14 @@ typeDefs = gql`
         pet: TypeEnum
     ) on OBJECT | FIELD_DEFINITION
 
+    type Address {
+        id: ID!
+        street: String!
+        number: Int!
+        complement: Int
+        zip_code: String!
+    }
+
     type User {
         id: ID!
         firstname: String!
@@ -23,6 +31,7 @@ typeDefs = gql`
         email: String!
         password: String!
         role: RoleEnum!
+        address: Address!
     }
 
     type Pet {
@@ -36,7 +45,8 @@ typeDefs = gql`
 
     type Query {
         allUsers: [User]
-        allPets: [Pet] @auth(role: ADMIN)
+        allPets: [Pet]
+        allAddress: [Address]
     }
 
     type Mutation {
@@ -45,6 +55,8 @@ typeDefs = gql`
 
         createPet(data: CreatePetInput): Pet 
         deletePet(id: ID!): Boolean
+
+        createAddress(data: CreateAddressInput): Address
 
         signin(
             email: String!
@@ -63,6 +75,7 @@ typeDefs = gql`
         email: String!
         password: String!
         role: RoleEnum!
+        address: CreateAddressUserInput
     }
 
     input CreatePetInput {
@@ -71,6 +84,17 @@ typeDefs = gql`
         breed: String!
         pet: TypeEnum!
         user: CreateUserPetInput
+    }
+
+    input CreateAddressInput {
+        street: String!
+        number: Int!
+        complement: Int
+        zip_code: String!
+    }
+
+    input CreateAddressUserInput {
+        id: ID!
     }
 
     input CreateUserPetInput {

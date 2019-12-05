@@ -1,7 +1,13 @@
 const { Model, DataTypes } = require('sequelize')
 const Sequelize = require('../database')
 
-class User extends Model { }
+const Address = require('./address')
+class User extends Model {
+    static associate() {
+        Address.hasMany(User)
+        User.belongsTo(Address)
+    }
+}
 
 User.init({
     firstname: DataTypes.STRING,
@@ -10,5 +16,7 @@ User.init({
     password: DataTypes.STRING,
     role: DataTypes.STRING,
 }, { sequelize: Sequelize, modelName: 'user' })
+
+User.associate()
 
 module.exports = User

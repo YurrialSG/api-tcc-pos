@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const Address = require('../models/address')
 const User = require('../models/user')
 
 async function signin(parent, body, context, info) {
@@ -23,10 +24,13 @@ async function signin(parent, body, context, info) {
 }
 
 async function createUser(parent, body, context, info) {
-    body.data.password = await bcrypt.hash(body.data.password, 10)
-    const user = await User.create(body.data)
-    const reloadedUser = user.reload()
-    return reloadedUser
+    if (body.data.address) {
+        body.data.password = await bcrypt.hash(body.data.password, 10)
+        const user = await User.create(body.data)
+        await user.setAddress(body.data.address.id)
+        const reloadedUser = user.reload({ include: [Address] })
+        return reloadedUser
+    }
 }
 
 async function deleteUser(parent, body, context, info) {
