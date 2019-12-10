@@ -12,28 +12,29 @@ const server = new ApolloServer({
     schemaDirectives: {
         auth: AuthDirective
     },
+    introspection: true,
 
     async context({ req, connection }) {
         if (connection) {
             return connection.context
         }
 
-        const token = req.headers.authorization
+        // const token = req.headers.authorization
 
-        if (token) {
-            const jwtData = jwt.decode(token.replace('Bearer ', ''))
-            const { id } = jwtData
+        // if (token) {
+        //     const jwtData = jwt.decode(token.replace('Bearer ', ''))
+        //     const { id } = jwtData
 
-            const user = await User.findOne({
-                where: { id }
-            })
+        //     const user = await User.findOne({
+        //         where: { id }
+        //     })
 
-            return {
-                headers: req.headers,
-                userId: id,
-                roleId: user.role
-            }
-        }
+        //     return {
+        //         headers: req.headers,
+        //         userId: id,
+        //         roleId: user.role
+        //     }
+        // }
 
         return {
             headers: req.headers,
