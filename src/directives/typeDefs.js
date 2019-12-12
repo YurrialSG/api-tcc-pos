@@ -31,7 +31,7 @@ typeDefs = gql`
         email: String!
         password: String!
         role: RoleEnum!
-        address: Address!
+        address: Address
     }
 
     type Pet {
@@ -45,6 +45,7 @@ typeDefs = gql`
 
     type Query {
         allUsers: [User]
+        allUsersAdmin: [User]
         allPets: [Pet]
         allAddress: [Address]
     }

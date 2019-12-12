@@ -24,13 +24,15 @@ async function signin(parent, body, context, info) {
 }
 
 async function createUser(parent, body, context, info) {
+    body.data.password = await bcrypt.hash(body.data.password, 10)
+    const user = await User.create(body.data)
     if (body.data.address) {
-        body.data.password = await bcrypt.hash(body.data.password, 10)
-        const user = await User.create(body.data)
         await user.setAddress(body.data.address.id)
         const reloadedUser = user.reload({ include: [Address] })
         return reloadedUser
     }
+    const reloadedUser = user.reload()
+    return reloadedUser
 }
 
 async function deleteUser(parent, body, context, info) {

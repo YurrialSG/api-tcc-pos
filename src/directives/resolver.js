@@ -9,7 +9,10 @@ const { createAddress } = require('../mutations/addressMutation')
 const resolver = {
     Query: {
         allUsers() {
-            return User.findAll({ include: [Address] })
+            return User.findAll({ where: {role: 'USER'}, include: [Address] })
+        },
+        allUsersAdmin(){
+            return User.findAll({ where: {role: 'ADMIN'}, include: [Address] })
         },
         allPets() {
             return Pet.findAll({ include: [User] })
