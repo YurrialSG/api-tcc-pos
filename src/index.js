@@ -4,11 +4,14 @@ const jwt = require('jsonwebtoken')
 const AuthDirective = require('./directives/auth')
 const { typeDefs } = require('./directives/typeDefs')
 const { resolver } = require('./directives/resolver')
-const User = require('./models/user')
+// const User = require('./models/user')
 
 const server = new ApolloServer({
     typeDefs: typeDefs,
     resolvers: resolver,
+    engine: {
+        apiKey: "service:api-tcc-pos:ntC8xNAImvi8VoUNNcT0bA",
+    },
     schemaDirectives: {
         auth: AuthDirective
     },
