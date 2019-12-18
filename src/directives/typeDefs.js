@@ -58,6 +58,7 @@ typeDefs = gql`
         deletePet(id: ID!): Boolean
 
         createAddress(data: CreateAddressInput): Address
+        deleteAddress(id: ID!): Boolean
 
         signin(
             email: String!

@@ -4,7 +4,7 @@ const Address = require('../models/address')
 
 const { signin, createUser, deleteUser } = require('../mutations/userMutation')
 const { createPet, deletePet } = require('../mutations/petMutation')
-const { createAddress } = require('../mutations/addressMutation')
+const { createAddress, deleteAddress } = require('../mutations/addressMutation')
 
 const resolver = {
     Query: {
@@ -33,6 +33,7 @@ const resolver = {
 
         //mutations Address
         createAddress,
+        deleteAddress,
     }
 }
 
