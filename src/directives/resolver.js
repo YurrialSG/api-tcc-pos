@@ -1,10 +1,12 @@
 const User = require('../models/user')
 const Pet = require('../models/pet')
 const Address = require('../models/address')
+const Service = require('../models/service')
 
 const { signin, createUser, deleteUser } = require('../mutations/userMutation')
 const { createPet, deletePet } = require('../mutations/petMutation')
 const { createAddress, deleteAddress } = require('../mutations/addressMutation')
+const { createService } = require('../mutations/serviceMutation')
 
 const resolver = {
     Query: {
@@ -19,6 +21,9 @@ const resolver = {
         },
         allAddress() {
             return Address.findAll()
+        },
+        allService() {
+            return Service.findAll({ include: [Pet] })
         }
     },
     Mutation: {
@@ -34,6 +39,9 @@ const resolver = {
         //mutations Address
         createAddress,
         deleteAddress,
+
+        //mutations Service
+        createService,
     }
 }
 

@@ -43,11 +43,21 @@ typeDefs = gql`
         user: User!
     }
 
+    type Service {
+        id: ID!
+        date: String!
+        schedule: String!
+        status: String!
+        payment: String!
+        pet: Pet!
+    }
+
     type Query {
         allUsers: [User]
         allUsersAdmin: [User]
         allPets: [Pet]
         allAddress: [Address]
+        allService: [Service]
     }
 
     type Mutation {
@@ -59,6 +69,8 @@ typeDefs = gql`
 
         createAddress(data: CreateAddressInput): Address
         deleteAddress(id: ID!): Boolean
+
+        createService(data: CreateServiceInput): Service
 
         signin(
             email: String!
@@ -95,11 +107,23 @@ typeDefs = gql`
         zip_code: String!
     }
 
+    input CreateServiceInput {
+        date: String!
+        schedule: String!
+        status: String!
+        payment: String!
+        pet: CreatePetServiceInput!
+    }
+
     input CreateAddressUserInput {
         id: ID!
     }
 
     input CreateUserPetInput {
+        id: ID!
+    }
+
+    input CreatePetServiceInput {
         id: ID!
     }
 
