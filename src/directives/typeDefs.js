@@ -58,6 +58,7 @@ typeDefs = gql`
         allPets: [Pet]
         allAddress: [Address]
         allService: [Service]
+        allServiceStart: [Service]
     }
 
     type Mutation {

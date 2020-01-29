@@ -24,6 +24,9 @@ const resolver = {
         },
         allService() {
             return Service.findAll({ include: [Pet] })
+        },
+        allServiceStart() {
+            return Service.findAll({ where: {status: 'PENDENTE'}, include: [Pet] })
         }
     },
     Mutation: {
