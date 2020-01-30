@@ -6,6 +6,19 @@ typeDefs = gql`
         USER
     }
 
+    enum StatusEnum {
+        PENDENTE
+        ESPERA
+        BANHO
+        CONCLUIDO
+        CANCELADO
+    }
+
+    enum PaymentEnum {
+        AGUARDANDO
+        PAGO
+    }
+
     enum TypeEnum {
         CACHORRO
         GATO
@@ -13,7 +26,9 @@ typeDefs = gql`
 
     directive @auth(
         role: RoleEnum,
-        pet: TypeEnum
+        pet: TypeEnum,
+        status: StatusEnum,
+        payment: PaymentEnum
     ) on OBJECT | FIELD_DEFINITION
 
     type Address {
@@ -47,8 +62,8 @@ typeDefs = gql`
         id: ID!
         date: String!
         schedule: String!
-        status: String!
-        payment: String!
+        status: StatusEnum!
+        payment: PaymentEnum!
         pet: Pet!
     }
 
@@ -57,8 +72,11 @@ typeDefs = gql`
         allUsersAdmin: [User]
         allPets: [Pet]
         allAddress: [Address]
-        allService: [Service]
-        allServiceStart: [Service]
+        allServicePendente: [Service]
+        allServiceSala: [Service]
+        allServiceConcluido: [Service]
+        allServiceCancel: [Service]
+        allServiceBanho: [Service]
     }
 
     type Mutation {
@@ -111,8 +129,8 @@ typeDefs = gql`
     input CreateServiceInput {
         date: String!
         schedule: String!
-        status: String!
-        payment: String!
+        status: StatusEnum!
+        payment: PaymentEnum!
         pet: CreatePetServiceInput!
     }
 

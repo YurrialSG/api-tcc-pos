@@ -22,12 +22,21 @@ const resolver = {
         allAddress() {
             return Address.findAll()
         },
-        allService() {
-            return Service.findAll({ include: [Pet] })
-        },
-        allServiceStart() {
+        allServicePendente() {
             return Service.findAll({ where: {status: 'PENDENTE'}, include: [Pet] })
-        }
+        },
+        allServiceSala() {
+            return Service.findAll({ where: {status: 'ESPERA'}, include: [Pet] })
+        },
+        allServiceConcluido() {
+            return Service.findAll({ where: {status: 'CONCLUIDO'}, include: [Pet] })
+        },
+        allServiceCancel() {
+            return Service.findAll({ where: {status: 'CANCELADO'}, include: [Pet] })
+        },
+        allServiceBanho() {
+            return Service.findAll({ where: {status: 'BANHO'}, include: [Pet] })
+        },
     },
     Mutation: {
         //mutations User
