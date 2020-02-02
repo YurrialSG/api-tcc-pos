@@ -10,6 +10,7 @@ typeDefs = gql`
         PENDENTE
         ESPERA
         BANHO
+        TOSA
         CONCLUIDO
         CANCELADO
     }
@@ -77,6 +78,7 @@ typeDefs = gql`
         allServiceConcluido: [Service]
         allServiceCancel: [Service]
         allServiceBanho: [Service]
+        allServiceTosa: [Service]
     }
 
     type Mutation {

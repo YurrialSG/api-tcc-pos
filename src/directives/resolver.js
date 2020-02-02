@@ -37,6 +37,9 @@ const resolver = {
         allServiceBanho() {
             return Service.findAll({ where: {status: 'BANHO'}, include: [Pet] })
         },
+        allServiceTosa() {
+            return Service.findAll({ where: {status: 'TOSA'}, include: [Pet] })
+        },
     },
     Mutation: {
         //mutations User
