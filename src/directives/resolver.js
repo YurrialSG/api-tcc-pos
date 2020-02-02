@@ -6,7 +6,7 @@ const Service = require('../models/service')
 const { signin, createUser, deleteUser } = require('../mutations/userMutation')
 const { createPet, deletePet } = require('../mutations/petMutation')
 const { createAddress, deleteAddress } = require('../mutations/addressMutation')
-const { createService } = require('../mutations/serviceMutation')
+const { createService, updateService } = require('../mutations/serviceMutation')
 
 const resolver = {
     Query: {
@@ -54,6 +54,7 @@ const resolver = {
 
         //mutations Service
         createService,
+        updateService,
     }
 }
 

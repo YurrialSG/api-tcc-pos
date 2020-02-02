@@ -90,6 +90,7 @@ typeDefs = gql`
         deleteAddress(id: ID!): Boolean
 
         createService(data: CreateServiceInput): Service
+        updateService(id: ID! data: UpdateServiceInput): Service
 
         signin(
             email: String!
@@ -132,6 +133,13 @@ typeDefs = gql`
         status: StatusEnum!
         payment: PaymentEnum!
         pet: CreatePetServiceInput!
+    }
+
+    input UpdateServiceInput {
+        date: String
+        schedule: String
+        status: StatusEnum
+        payment: PaymentEnum
     }
 
     input CreateAddressUserInput {
