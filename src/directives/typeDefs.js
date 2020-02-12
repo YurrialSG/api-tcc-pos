@@ -71,7 +71,7 @@ typeDefs = gql`
     type Query {
         allUsers: [User]
         allUsersAdmin: [User]
-        allPets: [Pet]
+        allPets(user: ID): [Pet]
         allAddress: [Address]
         allServicePendente: [Service]
         allServiceSala: [Service]

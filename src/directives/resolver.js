@@ -11,34 +11,46 @@ const { createService, updateService } = require('../mutations/serviceMutation')
 const resolver = {
     Query: {
         allUsers() {
-            return User.findAll({ where: {role: 'USER'}, include: [Address] })
+            return User.findAll({ where: { role: 'USER' }, include: [Address] })
         },
-        allUsersAdmin(){
-            return User.findAll({ where: {role: 'ADMIN'}, include: [Address] })
+        allUsersAdmin() {
+            return User.findAll({ where: { role: 'ADMIN' }, include: [Address] })
         },
-        allPets() {
+        async allPets(parent, body, context, info) {
+            if (context.userId) {
+                if (context.roleId !== 'ADMIN') {
+                    const petsID = await Pet.findAll({
+                        where: { userId: context.userId },
+                        include: [User]
+                    })
+                    if (!petsID) {
+                        throw new Error('Pet de usuário não encontrado')
+                    }
+                    return petsID
+                }
+            }
             return Pet.findAll({ include: [User] })
         },
         allAddress() {
             return Address.findAll()
         },
         allServicePendente() {
-            return Service.findAll({ where: {status: 'PENDENTE'}, include: [Pet] })
+            return Service.findAll({ where: { status: 'PENDENTE' }, include: [Pet] })
         },
         allServiceSala() {
-            return Service.findAll({ where: {status: 'ESPERA'}, include: [Pet] })
+            return Service.findAll({ where: { status: 'ESPERA' }, include: [Pet] })
         },
         allServiceConcluido() {
-            return Service.findAll({ where: {status: 'CONCLUIDO'}, include: [Pet] })
+            return Service.findAll({ where: { status: 'CONCLUIDO' }, include: [Pet] })
         },
         allServiceCancel() {
-            return Service.findAll({ where: {status: 'CANCELADO'}, include: [Pet] })
+            return Service.findAll({ where: { status: 'CANCELADO' }, include: [Pet] })
         },
         allServiceBanho() {
-            return Service.findAll({ where: {status: 'BANHO'}, include: [Pet] })
+            return Service.findAll({ where: { status: 'BANHO' }, include: [Pet] })
         },
         allServiceTosa() {
-            return Service.findAll({ where: {status: 'TOSA'}, include: [Pet] })
+            return Service.findAll({ where: { status: 'TOSA' }, include: [Pet] })
         },
     },
     Mutation: {
