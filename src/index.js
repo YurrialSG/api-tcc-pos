@@ -12,6 +12,7 @@ const server = new ApolloServer({
     schemaDirectives: {
         auth: AuthDirective
     },
+    introspection: true,
     //context: ({ req, res }) => ({req, res})
     async context({ req, connection }) {
         if (connection) {

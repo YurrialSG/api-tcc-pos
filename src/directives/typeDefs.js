@@ -72,6 +72,7 @@ typeDefs = gql`
         allUsers: [User]
         allUsersAdmin: [User]
         allPets(user: ID): [Pet]
+        onePet(id: ID!): Pet
         allAddress: [Address]
         allServicePendente: [Service]
         allServiceSala: [Service]

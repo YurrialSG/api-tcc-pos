@@ -31,6 +31,16 @@ const resolver = {
             }
             return Pet.findAll({ include: [User] })
         },
+        onePet(parent, body, context, info) {
+            const petOne = Pet.findOne({
+                where: { id: body.id }
+            })
+
+            if (!petOne)
+                throw new Error('Pet não encontrado')
+
+            return petOne
+        },
         allAddress() {
             return Address.findAll()
         },
