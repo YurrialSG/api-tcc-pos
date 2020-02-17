@@ -22,4 +22,15 @@ async function deletePet(parent, body, context, info) {
     return true
 }
 
-module.exports = { createPet, deletePet }
+async function onePet(parent, body, context, info) {
+    const petOne = Pet.findOne({
+        where: { id: body.id }
+    })
+
+    if (!petOne)
+        throw new Error('Pet não encontrado')
+
+    return petOne
+}
+
+module.exports = { createPet, deletePet, onePet }

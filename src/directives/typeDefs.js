@@ -72,7 +72,6 @@ typeDefs = gql`
         allUsers: [User]
         allUsersAdmin: [User]
         allPets(user: ID): [Pet]
-        onePet(id: ID!): Pet
         allAddress: [Address]
         allServicePendente: [Service]
         allServiceSala: [Service]
@@ -88,6 +87,7 @@ typeDefs = gql`
 
         createPet(data: CreatePetInput): Pet 
         deletePet(id: ID!): Boolean
+        onePet(id: ID!): Pet
 
         createAddress(data: CreateAddressInput): Address
         deleteAddress(id: ID!): Boolean
@@ -156,6 +156,7 @@ typeDefs = gql`
     input CreatePetServiceInput {
         id: ID!
     }
+
 
 `
 

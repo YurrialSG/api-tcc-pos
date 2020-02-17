@@ -4,7 +4,7 @@ const Address = require('../models/address')
 const Service = require('../models/service')
 
 const { signin, createUser, deleteUser } = require('../mutations/userMutation')
-const { createPet, deletePet } = require('../mutations/petMutation')
+const { createPet, deletePet, onePet } = require('../mutations/petMutation')
 const { createAddress, deleteAddress } = require('../mutations/addressMutation')
 const { createService, updateService } = require('../mutations/serviceMutation')
 
@@ -30,16 +30,6 @@ const resolver = {
                 }
             }
             return Pet.findAll({ include: [User] })
-        },
-        onePet(parent, body, context, info) {
-            const petOne = Pet.findOne({
-                where: { id: body.id }
-            })
-
-            if (!petOne)
-                throw new Error('Pet não encontrado')
-
-            return petOne
         },
         allAddress() {
             return Address.findAll()
@@ -72,6 +62,7 @@ const resolver = {
         //mutations Pet
         createPet,
         deletePet,
+        onePet,
 
         //mutations Address
         createAddress,
