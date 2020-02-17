@@ -1,3 +1,5 @@
+const { PubSub } = require('apollo-server')
+
 const User = require('../models/user')
 const Pet = require('../models/pet')
 const Address = require('../models/address')
@@ -6,7 +8,9 @@ const Service = require('../models/service')
 const { signin, createUser, deleteUser } = require('../mutations/userMutation')
 const { createPet, deletePet, onePet } = require('../mutations/petMutation')
 const { createAddress, deleteAddress } = require('../mutations/addressMutation')
-const { createService, updateService } = require('../mutations/serviceMutation')
+const { updateService } = require('../mutations/serviceMutation')
+
+const pubSubData = new PubSub()
 
 const resolver = {
     Query: {
@@ -69,8 +73,23 @@ const resolver = {
         deleteAddress,
 
         //mutations Service
-        createService,
+        async createService(parent, body, context, info) {
+            if (body.data.pet) {
+                const service = await Service.create(body.data)
+                await service.setPet(body.data.pet.id)
+                const reloadService = service.reload({ include: [Pet] })
+                pubSubData.publish('createService', {
+                    onCreateServices: reloadService
+                })
+                return reloadService
+            }
+        },
         updateService,
+    },
+    Subscription: {
+        onCreateServices: {
+            subscribe: () => pubSubData.asyncIterator('createService')
+        }
     }
 }
 

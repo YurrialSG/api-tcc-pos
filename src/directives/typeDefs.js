@@ -106,6 +106,10 @@ typeDefs = gql`
         user: User!
     }
 
+    type Subscription {
+        onCreateServices: Service
+    }
+
     input CreateUserInput {
         firstname: String!
         lastname: String!
