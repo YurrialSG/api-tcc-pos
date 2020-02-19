@@ -97,10 +97,11 @@ const resolver = {
             }
 
             const updatedService = await serviceWhereID.update(body.data)
+            const reloadUpdateService = updatedService.reload({ include: [Pet] })
             pubSub.publish('updateService', {
-                onUpdateServices: updatedService
+                onUpdateServices: reloadUpdateService
             })
-            return updatedService
+            return reloadUpdateService
         },
     },
     Subscription: {
