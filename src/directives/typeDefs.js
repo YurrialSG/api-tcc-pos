@@ -109,6 +109,7 @@ typeDefs = gql`
 
     type Subscription {
         onCreateServices: Service
+        onUpdateServices: Service
     }
 
     input CreateUserInput {

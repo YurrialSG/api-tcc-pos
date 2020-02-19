@@ -8,9 +8,9 @@ const Service = require('../models/service')
 const { signin, createUser, deleteUser } = require('../mutations/userMutation')
 const { createPet, deletePet, onePet } = require('../mutations/petMutation')
 const { createAddress, deleteAddress } = require('../mutations/addressMutation')
-const { updateService } = require('../mutations/serviceMutation')
 
 const pubSubData = new PubSub()
+const pubSub = new PubSub()
 
 const resolver = {
     Query: {
@@ -87,11 +87,28 @@ const resolver = {
                 return reloadService
             }
         },
-        updateService,
+        async updateService(parent, body, context, info) {
+            const serviceWhereID = await Service.findOne({
+                where: { id: body.id }
+            })
+
+            if (!serviceWhereID) {
+                throw new Error('Serviço não encontrado')
+            }
+
+            const updatedService = await serviceWhereID.update(body.data)
+            pubSub.publish('updateService', {
+                onUpdateServices: updatedService
+            })
+            return updatedService
+        },
     },
     Subscription: {
         onCreateServices: {
             subscribe: () => pubSubData.asyncIterator('createService')
+        },
+        onUpdateServices: {
+            subscribe: () => pubSub.asyncIterator('updateService')
         }
     }
 }
