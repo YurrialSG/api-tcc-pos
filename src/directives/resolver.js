@@ -38,6 +38,9 @@ const resolver = {
         allAddress() {
             return Address.findAll()
         },
+        allService() {
+            return Service.findAll({ include: [Pet] })
+        },
         allServicePendente() {
             return Service.findAll({ where: { status: 'PENDENTE' }, include: [Pet] })
         },
