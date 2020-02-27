@@ -43,7 +43,7 @@ O interesse para o desenvolvimento deste sistema surgiu como opção para agiliz
 
 **Projetos que usam a API em GraphQL:**
 
-Link para a parte Web do sistema: [Web](https://gitlab.com/senac_pos-tcc_desenvolvimento-web-mobile-2019/projeto_tcc-7/pata-marca-web)
+Link para a parte Web do sistema: [Pata Marca Web](https://gitlab.com/senac_pos-tcc_desenvolvimento-web-mobile-2019/projeto_tcc-7/pata-marca-web)
 
-Link para a parte Mobile do sistema: [Mobile](https://gitlab.com/senac_pos-tcc_desenvolvimento-web-mobile-2019/projeto_tcc-7/pata-marca-mobile)
+Link para a parte Mobile do sistema: [Pata Marca Mobile](https://gitlab.com/senac_pos-tcc_desenvolvimento-web-mobile-2019/projeto_tcc-7/pata-marca-mobile)
 
