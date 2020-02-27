@@ -43,24 +43,7 @@ O interesse para o desenvolvimento deste sistema surgiu como opção para agiliz
 
 **Projetos que usam a API em GraphQL:**
 
-Link para a parte Web do sistema: [Web](https://gitlab.com/YuriSilveira/web_tcc_pos)
+Link para a parte Web do sistema: [Web](https://gitlab.com/senac_pos-tcc_desenvolvimento-web-mobile-2019/projeto_tcc-7/pata-marca-web)
 
-Link para a parte Mobile do sistema: [Mobile](https://gitlab.com/YuriSilveira/mobile_tcc_pos)
+Link para a parte Mobile do sistema: [Mobile](https://gitlab.com/senac_pos-tcc_desenvolvimento-web-mobile-2019/projeto_tcc-7/pata-marca-mobile)
 
-## Guia de utilização da API do projeto
-
-Etapas para serem executado o projeto:
-
-1.  Executar passo a passo da API do projeto.
-2.  Executar passo a passo da parte Web do projeto.
-3.  Executar passo a passo da parte Mobile do projeto.
-
-**Passo a passo para utilizar a api do projeto:**
-
-1.  Fazer download do projeto no GitLab: Link para a parte Web do sistema: [API](https://gitlab.com/senac_pos-tcc_desenvolvimento-web-mobile-2019/projeto_tcc-7/pata-marca-api)
-2.  Abrir pront de comando do sistema operacional.
-3.  Acessar pasta local da API baixada.
-4.  Digitar 'npm install' e dar ENTER.
-5.  Após digitar 'npm start' e dar ENTER.
-6.  API rodando... minimizar o pront de comando e deixar a API rodando.
-7.  Ir para segunda (passo a passo da parte Web) e terceira (passo a passo da parte Mobile) etapa do execução do projeto.
