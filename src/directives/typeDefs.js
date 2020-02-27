@@ -66,6 +66,7 @@ typeDefs = gql`
         status: StatusEnum!
         payment: PaymentEnum!
         pet: Pet!
+        user: User!
     }
 
     type Query {
@@ -142,6 +143,7 @@ typeDefs = gql`
         status: StatusEnum!
         payment: PaymentEnum!
         pet: CreatePetServiceInput!
+        user: CreateUserServiceInput! 
     }
 
     input UpdateServiceInput {
@@ -163,6 +165,9 @@ typeDefs = gql`
         id: ID!
     }
 
+    input CreateUserServiceInput {
+        id: ID!
+    }
 
 `
 

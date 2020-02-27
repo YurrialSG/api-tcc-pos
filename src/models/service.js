@@ -2,12 +2,17 @@ const { Model, DataTypes } = require('sequelize')
 const Sequelize = require('../database')
 
 const Pet = require('./pet')
+const User = require('./user')
 
 class Service extends Model {
     static associate() {
         Pet.hasMany(Service)
         Service.belongsTo(Pet)
+
+        User.hasMany(Service)
+        Service.belongsTo(User)
     }
+
 }
 
 Service.init({

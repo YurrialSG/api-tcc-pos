@@ -38,8 +38,18 @@ const resolver = {
         allAddress() {
             return Address.findAll()
         },
-        allService() {
-            return Service.findAll({ include: [Pet] })
+        async allService(parent, body, context, info) {
+            if (context.userId) {
+                const servicesID = await Service.findAll({
+                    where: { userId: context.userId },
+                    include: [Pet, User]
+                })
+                if (!servicesID) {
+                    throw new Error('Serviços de usuário não encontrado')
+                }
+                return servicesID
+            }
+            return Service.findAll({ include: [Pet, User] })
         },
         allServicePendente() {
             return Service.findAll({ where: { status: 'PENDENTE' }, include: [Pet] })
@@ -80,7 +90,8 @@ const resolver = {
             if (body.data.pet) {
                 const service = await Service.create(body.data)
                 await service.setPet(body.data.pet.id)
-                const reloadService = service.reload({ include: [Pet] })
+                await service.setUser(body.data.user.id)
+                const reloadService = service.reload({ include: [Pet, User] })
                 pubSubData.publish('createService', {
                     onCreateServices: reloadService
                 })
