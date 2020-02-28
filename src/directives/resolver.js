@@ -5,7 +5,7 @@ const Pet = require('../models/pet')
 const Address = require('../models/address')
 const Service = require('../models/service')
 
-const { signin, createUser, deleteUser } = require('../mutations/userMutation')
+const { signin, createUser, deleteUser, oneUser } = require('../mutations/userMutation')
 const { createPet, deletePet, onePet } = require('../mutations/petMutation')
 const { createAddress, deleteAddress } = require('../mutations/addressMutation')
 
@@ -75,6 +75,7 @@ const resolver = {
         signin,
         createUser,
         deleteUser,
+        oneUser,
 
         //mutations Pet
         createPet,

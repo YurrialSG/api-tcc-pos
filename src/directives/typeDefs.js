@@ -86,6 +86,7 @@ typeDefs = gql`
     type Mutation {
         createUser(data: CreateUserInput): User
         deleteUser(id: ID!): Boolean
+        oneUser(id: ID!): User
 
         createPet(data: CreatePetInput): Pet 
         deletePet(id: ID!): Boolean

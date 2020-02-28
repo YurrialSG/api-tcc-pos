@@ -47,4 +47,16 @@ async function deleteUser(parent, body, context, info) {
     return true
 }
 
-module.exports = { signin, createUser, deleteUser }
+async function oneUser(parent, body, context, info) {
+    const userOne = User.findOne({
+        where: { id: body.id },
+        include: [Address]
+    })
+
+    if (!userOne)
+        throw new Error('Usuário não encontrado')
+
+    return userOne
+}
+
+module.exports = { signin, createUser, deleteUser, oneUser }
