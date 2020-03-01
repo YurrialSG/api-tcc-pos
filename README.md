@@ -39,7 +39,8 @@ O interesse para o desenvolvimento deste sistema surgiu como opção para agiliz
 * Utilizar linguagem de programação JavaScript;
 * Ter acesso à internet.
 
-**Modelo Entidade Relacionamento(MER)**
+**Modelo Entidade Relacionamento(MER)** <br />
+![ModeloER](/uploads/1d25e074b8aba4d9625d24cf7eadd518/ModeloER.png)
 
 **Projetos que usam a API em GraphQL:**
 
