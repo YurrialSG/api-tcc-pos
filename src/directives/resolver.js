@@ -109,7 +109,7 @@ const resolver = {
             }
 
             const updatedService = await serviceWhereID.update(body.data)
-            const reloadUpdateService = updatedService.reload({ include: [Pet] })
+            const reloadUpdateService = updatedService.reload({ include: [Pet, User] })
             pubSub.publish('updateService', {
                 onUpdateServices: reloadUpdateService
             })
