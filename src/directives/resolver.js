@@ -57,7 +57,20 @@ const resolver = {
         allServiceSala() {
             return Service.findAll({ where: { status: 'ESPERA' }, include: [Pet] })
         },
-        allServiceConcluido() {
+        async allServiceConcluido(parent, body, context, info) {
+            if (context.userId) {
+                const servicesID = await Service.findAll({
+                    where: {
+                        userId: context.userId,
+                        status: 'CONCLUIDO',
+                    },
+                    include: [Pet]
+                })
+                if (!servicesID) {
+                    throw new Error('Serviços de usuário não encontrado')
+                }
+                return servicesID
+            }
             return Service.findAll({ where: { status: 'CONCLUIDO' }, include: [Pet] })
         },
         allServiceCancel() {
