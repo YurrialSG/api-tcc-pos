@@ -1,4 +1,4 @@
-## Instalando
+## Instalando (uso local)
 
 1. Clone este repositório na sua máquina local
 
