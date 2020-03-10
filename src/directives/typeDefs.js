@@ -97,6 +97,7 @@ typeDefs = gql`
 
         createService(data: CreateServiceInput): Service
         updateService(id: ID! data: UpdateServiceInput): Service
+        findOneService(data: FindOneServiceInput!): Service
 
         signin(
             email: String!
@@ -152,6 +153,11 @@ typeDefs = gql`
         schedule: String
         status: StatusEnum
         payment: PaymentEnum
+    }
+
+    input FindOneServiceInput {
+        date: String
+        schedule: String
     }
 
     input CreateAddressUserInput {

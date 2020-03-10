@@ -8,6 +8,7 @@ const Service = require('../models/service')
 const { signin, createUser, deleteUser, oneUser } = require('../mutations/userMutation')
 const { createPet, deletePet, onePet } = require('../mutations/petMutation')
 const { createAddress, deleteAddress } = require('../mutations/addressMutation')
+const { findOneService } = require('../mutations/serviceMutation')
 
 const pubSubData = new PubSub()
 const pubSub = new PubSub()
@@ -100,6 +101,7 @@ const resolver = {
         deleteAddress,
 
         //mutations Service
+        findOneService,
         async createService(parent, body, context, info) {
             if (body.data.pet) {
                 const service = await Service.create(body.data)
