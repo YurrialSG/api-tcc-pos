@@ -10,6 +10,7 @@ const { createPet, deletePet, onePet } = require('../mutations/petMutation')
 const { createAddress, deleteAddress } = require('../mutations/addressMutation')
 const { findOneService } = require('../mutations/serviceMutation')
 
+//pubSub para os subscriptions
 const pubSubData = new PubSub()
 const pubSub = new PubSub()
 
